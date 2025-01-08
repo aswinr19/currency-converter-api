@@ -1,10 +1,9 @@
 package com.example.currencyconverter.utils;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Map;
 
 @Component
 public class ExternalApiClient {
@@ -14,7 +13,16 @@ public class ExternalApiClient {
     @Value("${exchange.api.url}")
     private String apiUrl; 
     public double fetchExchangeRate(String fromCurrency, String toCurrency) {
-        String url = apiUrl + "?base=" + fromCurrency; 
+      
+      //System.out.println("api url");
+      //System.out.println(apiUrl);
+
+      //System.out.println(fromCurrency);
+      //System.out.println(toCurrency);
+
+        String url = apiUrl + "&base=" + fromCurrency; 
+
+      System.out.println(url);
         ExchangeRateResponse response = restTemplate.getForObject(url, ExchangeRateResponse.class);
 
         if (response != null && response.getRates().containsKey(toCurrency)) {
@@ -25,7 +33,6 @@ public class ExternalApiClient {
     }
 }
 
-// Response model for external API
 class ExchangeRateResponse {
     private String disclaimer;
     private String license;
@@ -33,7 +40,6 @@ class ExchangeRateResponse {
     private String base;
     private Map<String, Double> rates;
 
-    // Getters and Setters
     public String getDisclaimer() { return disclaimer; }
     public void setDisclaimer(String disclaimer) { this.disclaimer = disclaimer; }
     public String getLicense() { return license; }
