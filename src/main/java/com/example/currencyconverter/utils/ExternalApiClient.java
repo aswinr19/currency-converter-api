@@ -11,16 +11,13 @@ public class ExternalApiClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${exchange.api.url}")
+   // @Value("${exchange.api.url}")
+
+    @Value("https://openexchangerates.org/api/latest.json?app_id=a5561add2f7a45bfa69886c43598770e")
     private String apiUrl; 
     public double fetchExchangeRate(String fromCurrency, String toCurrency) {
-      
-      //System.out.println("api url");
-      //System.out.println(apiUrl);
 
-      //System.out.println(fromCurrency);
-      //System.out.println(toCurrency);
-
+       // the base currency is USD by default, so no need to set it here 
         String url = apiUrl + "&base=" + fromCurrency; 
 
       System.out.println(url);
