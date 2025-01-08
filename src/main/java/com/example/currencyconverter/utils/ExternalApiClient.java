@@ -2,6 +2,7 @@ package com.example.currencyconverter.utils;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,6 +12,7 @@ public class ExternalApiClient {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${exchange.api.url}")
+    // @Value("https://openexchangerates.org/api/latest.json?app_id=a5561add2f7a45bfa69886c43598770e")
     private String apiUrl; 
     public double fetchExchangeRate(String fromCurrency, String toCurrency) {
       
